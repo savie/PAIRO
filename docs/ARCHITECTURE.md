@@ -94,7 +94,7 @@ WebRTC dapat digunakan dari aplikasi Android native melalui library Android. PAI
 
 ## 10. Keputusan teknis yang masih terbuka
 
-Library Signal Protocol, implementasi WebRTC, enkripsi database, backend signaling, relay hosting, TURN provider, minimum Android API, dan mekanisme recovery harus dipilih setelah evaluasi kompatibilitas, lisensi, pemeliharaan, keamanan, serta biaya.
+Library Signal Protocol, implementasi WebRTC, enkripsi database, backend signaling, relay hosting, dan TURN provider masih perlu dipilih setelah evaluasi kompatibilitas, lisensi, pemeliharaan, keamanan, serta biaya. Target Android 8–17 sudah menjadi arahan produk; pekerjaan tersisa adalah verifikasi kompatibilitas teknis di dalam rentang tersebut. Alur produk migrasi identity (persetujuan perangkat aktif atau recovery key, mempertahankan identity/fingerprint, dan satu perangkat aktif) juga sudah ditetapkan; rincian implementasi revocation dan key lifecycle masih perlu dirancang.
 
 ## 12. Attachment dan private media viewer (usulan)
 

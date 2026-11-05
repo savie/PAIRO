@@ -66,22 +66,22 @@ Pertanyaan berikut adalah pekerjaan perincian implementasi atas keputusan yang s
 | OPEN-003 | Prosedur transfer/pemulihan material identity dan pembentukan ulang session/pre-key tanpa mengubah identity/fingerprint. | Keamanan migrasi |
 | OPEN-004 | Mekanisme provisioning dan enforcement Owner Mode yang aman, tanpa mengubah model kontak lokal dan batas akses percakapan yang telah disepakati. | Otorisasi Owner Mode |
 | OPEN-005 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
-| OPEN-005 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
-| OPEN-005 | Signaling service dibangun di mana? | Hosting dan operasi |
-| OPEN-005 | Relay self-host atau managed service? | Biaya dan kontrol |
-| OPEN-005 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
-| OPEN-005 | Provider cloud backup pertama? | OAuth/API/scope |
-| OPEN-005 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
-| OPEN-005 | Format recovery key, cara penyimpanan/rotasi, dan prosedur jika recovery key hilang? | Kehilangan data dan pemulihan identity |
-| OPEN-005 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
-| OPEN-005 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
-| OPEN-005 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
-| OPEN-005 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
-| OPEN-005 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
-| OPEN-005 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
-| OPEN-005 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
-| OPEN-005 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
-| OPEN-005 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
+| OPEN-006 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
+| OPEN-007 | Signaling service dibangun di mana? | Hosting dan operasi |
+| OPEN-008 | Relay self-host atau managed service? | Biaya dan kontrol |
+| OPEN-009 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
+| OPEN-010 | Provider cloud backup pertama? | OAuth/API/scope |
+| OPEN-011 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
+| OPEN-012 | Format recovery key, cara penyimpanan/rotasi, dan prosedur jika recovery key hilang? | Kehilangan data dan pemulihan identity |
+| OPEN-013 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
+| OPEN-014 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
+| OPEN-015 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
+| OPEN-016 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
+| OPEN-017 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
+| OPEN-018 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
+| OPEN-019 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
+| OPEN-020 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
+| OPEN-021 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
 
 ## 4. Aturan perubahan
 

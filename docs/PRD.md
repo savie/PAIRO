@@ -49,6 +49,8 @@ Target rentang kompatibilitas awal yang disampaikan adalah Android 8 sampai Andr
 | FR-023 | Pairing disconnect/re-pair consent | P0 | Memutus dan membuat ulang pairing harus melalui persetujuan pihak-pihak terkait |
 | FR-024 | Conversation backup batch | P1 | Seluruh percakapan dicadangkan sebagai satu batch; tidak ada pemilihan per conversation |
 | FR-025 | Selective media/file backup | P1 | Pengguna dapat memilih satu atau beberapa media/file saat proses backup |
+| FR-026 | Device-to-device migration approval | P1 | Jika perangkat lama hendak diaktifkan kembali sementara identity aktif di perangkat lain, PAIRO meminta persetujuan dari perangkat yang sedang aktif sebelum memindahkan otorisasi |
+| FR-027 | Recovery-key fallback | P1 | Jika perangkat yang sedang aktif tidak tersedia, pengguna dapat memvalidasi pemulihan identity menggunakan recovery key yang diterbitkan saat identity dibuat |
 
 ## 5. Kebutuhan nonfungsional
 
@@ -72,7 +74,8 @@ Target rentang kompatibilitas awal yang disampaikan adalah Android 8 sampai Andr
 - Perubahan identity key ditampilkan sebagai peristiwa keamanan.
 - Status pesan membedakan tersimpan lokal, mengirim, menunggu penerima, diterima, gagal, dan kedaluwarsa.
 - Pengguna mengetahui bahwa expiry relay tidak menghapus salinan lokal penerima.
-- Backup tidak aktif tanpa persetujuan; recovery secret dijelaskan saat setup.
+- Backup tidak aktif tanpa persetujuan; recovery key dibuat saat identity dibuat dan instruksi penyimpanan ditampilkan saat setup.
+- Perpindahan identity meminta persetujuan perangkat aktif jika perangkat tersebut tersedia; recovery key menjadi jalur alternatif jika perangkat aktif tidak tersedia.
 - Backup selector menyediakan kategori data; percakapan dipilih sebagai satu batch.
 - Media/file pada backup dapat dipilih secara individual atau multi-select.
 
@@ -90,6 +93,7 @@ Grup, channel, panggilan, public discovery, web/desktop client, dan fitur sosial
 - Tidak ada kebocoran data antaridentity.
 - Backup valid dapat dipulihkan dan backup dengan recovery key salah ditolak.
 - Migrasi identity tidak memungkinkan dua perangkat aktif secara bersamaan.
+- Migrasi normal memerlukan persetujuan perangkat aktif; jalur recovery key dapat digunakan ketika perangkat aktif tidak tersedia.
 - PAIRO berjalan pada rentang versi Android yang akhirnya ditetapkan dan diuji.
 
 ## 9. Catatan attachment dan media privat

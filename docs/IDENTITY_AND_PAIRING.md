@@ -24,8 +24,12 @@ Arahan produk: **satu identity hanya aktif pada satu perangkat dalam satu waktu*
 - Aktivasi identity pada perangkat baru wajib melalui proses validasi.
 - Setelah migrasi/aktivasi perangkat baru berhasil, perangkat lama tidak boleh tetap menggunakan identity yang sama sebagai perangkat aktif.
 - Perangkat lama harus dinonaktifkan atau otorisasinya dicabut melalui mekanisme yang dapat diverifikasi.
-- Jika perangkat lama masih tersedia, proses migrasi dapat memanfaatkannya sebagai faktor persetujuan tambahan; jika hilang/rusak, diperlukan recovery flow alternatif.
-- Detail faktor validasi, recovery secret, key rotation, dan penanganan perangkat offline masih terbuka.
+- Jika perangkat lama masih tersedia tetapi identity telah aktif di perangkat lain, perangkat lama menampilkan status bahwa identity sedang digunakan di perangkat baru.
+- Perpindahan kembali ke perangkat lama meminta persetujuan dari perangkat yang saat ini aktif.
+- Jika perangkat yang saat ini aktif tidak tersedia (misalnya hilang atau rusak), recovery key dapat digunakan sebagai jalur validasi alternatif.
+- Setelah salah satu jalur validasi berhasil, otorisasi perangkat aktif sebelumnya harus dicabut dan perangkat tujuan menjadi satu-satunya perangkat aktif.
+- Recovery key dibuat saat identity pertama kali dibuat; recovery key bukan bagian yang baru diterbitkan ketika backup dimulai.
+- Rincian protokol persetujuan, recovery key, key rotation, dan penanganan perangkat offline masih perlu dirancang.
 
 Restore file backup saja tidak boleh otomatis membuat dua perangkat aktif dengan identity key yang sama.
 
@@ -101,4 +105,4 @@ Desain wajib mencakup:
 - Penanganan perangkat lama yang hilang, rusak, offline, atau masih aktif.
 - Perlindungan dari restore backup yang menghasilkan dua perangkat aktif.
 
-Prosedur, recovery secret, dan faktor validasi belum diputuskan. Jangan mengklaim identity recovery aman sebelum alur tersebut dirancang dan diuji.
+Aturan produk sementara: prioritaskan persetujuan dari perangkat yang sedang aktif ketika perangkat itu tersedia. Recovery key menjadi jalur alternatif ketika perangkat aktif tidak tersedia. Recovery key diterbitkan saat identity dibuat dan harus disimpan pengguna secara mandiri. Rincian format, proteksi, rotasi, rate limit, protokol revocation, serta recovery ketika recovery key juga hilang masih belum diputuskan. Jangan mengklaim identity recovery aman sebelum alur tersebut dirancang dan diuji.

@@ -95,3 +95,13 @@ WebRTC dapat digunakan dari aplikasi Android native melalui library Android. PAI
 ## 10. Keputusan teknis yang masih terbuka
 
 Library Signal Protocol, implementasi WebRTC, enkripsi database, backend signaling, relay hosting, TURN provider, minimum Android API, dan mekanisme recovery harus dipilih setelah evaluasi kompatibilitas, lisensi, pemeliharaan, keamanan, serta biaya.
+
+## 12. Attachment dan private media viewer (usulan)
+
+Pipeline attachment mencakup pemilihan file, validasi, enkripsi E2EE, transfer, penyimpanan ciphertext, dekripsi saat diperlukan, dan pembersihan cache sementara.
+
+PAIRO diusulkan memiliki image viewer, video/audio player, dan document preview internal untuk format yang dipilih. Attachment privat tidak otomatis dilempar ke aplikasi lain melalui ACTION_VIEW atau diekspor ke shared storage. Export/Share, jika disediakan, hanya melalui tindakan eksplisit pengguna.
+
+“In-app only” bukan jenis enkripsi atau codec tersendiri. Enkripsi melindungi file saat transfer/penyimpanan; internal viewer adalah kontrol aplikasi yang mendekripsi dan merender konten tanpa otomatis menyerahkan plaintext ke aplikasi lain. Pengguna tetap dapat menangkap konten dengan cara lain, dan OS yang dikompromikan berada di luar jaminan aplikasi.
+
+Rincian format, cache, batasan Android, dan acceptance criteria ada di [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md).

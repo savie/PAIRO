@@ -29,7 +29,7 @@ Arahan produk: **satu identity hanya aktif pada satu perangkat dalam satu waktu*
 - Jika perangkat yang saat ini aktif tidak tersedia (misalnya hilang atau rusak), recovery key dapat digunakan sebagai jalur validasi alternatif.
 - Setelah salah satu jalur validasi berhasil, otorisasi perangkat aktif sebelumnya harus dicabut dan perangkat tujuan menjadi satu-satunya perangkat aktif.
 - Recovery key dibuat saat identity pertama kali dibuat; recovery key bukan bagian yang baru diterbitkan ketika backup dimulai.
-- Rincian protokol persetujuan, recovery key, key rotation, dan penanganan perangkat offline masih perlu dirancang.
+- Rincian protokol persetujuan, recovery key, key rotation, dan penanganan perangkat offline masih perlu dirancang sebagai detail implementasi; aturan produk tentang persetujuan perangkat aktif atau recovery-key fallback tidak dibuka ulang.
 
 Restore file backup saja tidak boleh otomatis membuat dua perangkat aktif dengan identity key yang sama.
 
@@ -48,7 +48,7 @@ Restore file backup saja tidak boleh otomatis membuat dua perangkat aktif dengan
 - Setiap identity/pairing memiliki key material, session, database, dan konteks percakapan yang terisolasi.
 - Owner tidak memiliki akses membaca percakapan identity lain hanya karena memiliki Owner Mode.
 
-Mekanisme provisioning Owner Mode masih terbuka. Jangan mengandalkan flag lokal yang dapat dimodifikasi sebagai satu-satunya kontrol otorisasi.
+Model produk Owner Mode sudah ditetapkan: beberapa pairing dikelola sebagai kontak lokal PAIRO, tanpa akses ke kontak sistem Android dan tanpa hak membaca percakapan identity lain. Yang masih terbuka hanya mekanisme provisioning dan enforcement teknisnya. Jangan mengandalkan flag lokal yang dapat dimodifikasi sebagai satu-satunya kontrol otorisasi.
 
 ## 4. Pairing lifecycle
 
@@ -105,4 +105,4 @@ Desain wajib mencakup:
 - Penanganan perangkat lama yang hilang, rusak, offline, atau masih aktif.
 - Perlindungan dari restore backup yang menghasilkan dua perangkat aktif.
 
-Aturan produk sementara: prioritaskan persetujuan dari perangkat yang sedang aktif ketika perangkat itu tersedia. Recovery key menjadi jalur alternatif ketika perangkat aktif tidak tersedia. Recovery key diterbitkan saat identity dibuat dan harus disimpan pengguna secara mandiri. Rincian format, proteksi, rotasi, rate limit, protokol revocation, serta recovery ketika recovery key juga hilang masih belum diputuskan. Jangan mengklaim identity recovery aman sebelum alur tersebut dirancang dan diuji.
+Aturan produk sementara: prioritaskan persetujuan dari perangkat yang sedang aktif ketika perangkat itu tersedia. Recovery key menjadi jalur alternatif ketika perangkat aktif tidak tersedia. Recovery key diterbitkan saat identity dibuat dan harus disimpan pengguna secara mandiri. Rincian format, proteksi, rotasi, rate limit, dan protokol revocation masih perlu dirancang. Jika perangkat aktif dan recovery key sama-sama hilang, identity tidak dapat dipulihkan tanpa bukti kepemilikan lain; PAIRO tidak menyediakan master key server atau reset administratif. Jangan mengklaim identity recovery aman sebelum alur tersebut dirancang dan diuji.

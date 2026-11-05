@@ -13,6 +13,7 @@
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Arsitektur Android, backend minimum, alur data |
 | [IDENTITY_AND_PAIRING.md](IDENTITY_AND_PAIRING.md) | Identity, Standard/Owner Mode, pairing |
 | [MESSAGING_AND_CONNECTIVITY.md](MESSAGING_AND_CONNECTIVITY.md) | Pesan, WebRTC, relay, offline delivery |
+| [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md) | Attachment E2EE, in-app viewer/player, ekspor atas pilihan pengguna, dan View Once |
 | [SECURITY.md](SECURITY.md) | Sasaran keamanan, key management, batas klaim |
 | [STORAGE_AND_BACKUP.md](STORAGE_AND_BACKUP.md) | Database lokal dan personal cloud backup |
 | [THREAT_MODEL.md](THREAT_MODEL.md) | Aset, aktor ancaman, trust boundary, mitigasi |

@@ -63,7 +63,7 @@ Perilaku produk yang diusulkan:
 
 Detail teknis yang masih terbuka:
 - Kapan view dihitung: saat dibuka atau setelah konten selesai dimuat.
-- Apakah video boleh diputar ulang dalam sesi yang sama.
+- Video boleh diputar ulang selama sesi viewer View Once yang sama masih terbuka. Menutup viewer mengakhiri sesi dan kesempatan membuka media tersebut.
 - Batas waktu penerima untuk membuka media.
 - Perilaku saat aplikasi crash, force-stop, atau perangkat offline.
 - Penanganan multi-device dan sinkronisasi status viewed.

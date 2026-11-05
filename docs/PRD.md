@@ -78,10 +78,12 @@ Grup, channel, panggilan, public discovery, web/desktop client, sinkronisasi mul
 |---|---|---:|---|
 | FR-018 | Private in-app media | P1 | Gambar, video, audio, dan format file yang didukung dibuka melalui viewer/player internal secara default |
 | FR-019 | No automatic external opening | P1 | Attachment privat tidak otomatis diekspor ke shared storage atau dibuka aplikasi pihak ketiga |
-| FR-020 | Explicit export/share | Terbuka | Jika fitur ekspor disediakan, pengguna harus memulainya secara eksplisit; kebijakan final belum ditentukan |
+| FR-020 | User-controlled export/share | P1 | Pengguna dapat secara eksplisit menyimpan attachment biasa ke Gallery/perangkat atau membagikannya; tidak ada ekspor otomatis |
+| FR-021 | View Once media | P1 | Pengirim dapat menandai media View Once; penerima hanya dapat membukanya sekali melalui viewer internal sesuai aturan sesi yang ditetapkan |
 
 Tambahan NFR:
-- Attachment hasil dekripsi tidak disimpan ke shared/public storage secara default.
+- Attachment hasil dekripsi tidak disimpan ke shared/public storage secara default; pengguna boleh memilih ekspor/simpan secara eksplisit.
+- Attachment View Once tidak tersedia untuk ekspor melalui fitur PAIRO dan tidak dapat dibuka ulang setelah status viewed tercatat.
 - Plaintext attachment dibatasi pada memory atau cache privat sementara sejauh memungkinkan.
 - File yang tidak didukung tidak boleh otomatis dibuka aplikasi eksternal.
 - Format/codec yang didukung dan batas ukuran file harus ditentukan.

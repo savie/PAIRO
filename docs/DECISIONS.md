@@ -21,6 +21,8 @@
 | TALK-011 | Standard Mode | Satu identity dan satu pairing aktif |
 | TALK-012 | Owner Mode | Owner dapat membuat beberapa identity independen |
 | TALK-013 | Owner privilege | Tidak memberi akses membaca chat identity lain |
+| TALK-014 | Attachment export | Pengguna boleh memilih sendiri untuk menyimpan/mengekspor attachment biasa ke Gallery/perangkat atau membagikannya; tidak otomatis |
+| TALK-015 | View Once | Fitur View Once untuk media disetujui sebagai kebutuhan produk; detail perilaku teknis masih terbuka |
 
 ## 2. Usulan teknis yang belum disetujui
 
@@ -56,6 +58,10 @@
 | OPEN-012 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | UX dan retensi |
 | OPEN-013 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
 | OPEN-014 | Lisensi proyek dan kebijakan privasi? | Distribusi dan legal |
+| OPEN-015 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
+| OPEN-016 | Apakah video View Once boleh diputar ulang dalam sesi tampilan yang sama? | UX dan state machine |
+| OPEN-017 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
+| OPEN-018 | Bagaimana View Once berperilaku pada multi-device/recovery? | Sinkronisasi state |
 
 ## 4. Aturan perubahan
 

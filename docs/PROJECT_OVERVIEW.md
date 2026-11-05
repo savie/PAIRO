@@ -54,7 +54,7 @@ PAIRO berfokus pada komunikasi dua pihak, kepemilikan data lokal, kontrol penggu
 - Tidak ada hak istimewa untuk membaca percakapan pengguna lain.
 - PAIRO tidak mengakses address book Android.
 
-Mekanisme aman untuk menandai atau mengaktifkan Owner Mode masih terbuka. Jangan mengandalkan nama pengguna, email, atau flag lokal yang mudah dimodifikasi sebagai satu-satunya otorisasi.
+Model Owner Mode telah dibahas: beberapa pairing dikelola melalui kontak lokal PAIRO, tanpa akses ke address book Android dan tanpa hak membaca percakapan identity lain. Yang masih terbuka hanya mekanisme provisioning/enforcement teknisnya. Jangan mengandalkan nama pengguna, email, atau flag lokal yang mudah dimodifikasi sebagai satu-satunya otorisasi.
 
 ## 5. Sasaran MVP
 

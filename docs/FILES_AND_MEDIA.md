@@ -4,24 +4,22 @@
 
 ## 1. Tujuan
 
-Pengguna ingin gambar, video, audio/suara, dan file yang dikirim melalui PAIRO dibuka atau diputar di dalam PAIRO, bukan otomatis diserahkan ke Gallery, Photos, pemutar media, file manager, atau aplikasi pihak ketiga.
-
-Arah yang diusulkan adalah **private in-app media**: attachment diterima sebagai ciphertext, didekripsi hanya ketika diperlukan, lalu dirender oleh viewer/player internal PAIRO.
+Gambar, video, audio/suara, dan file yang dikirim melalui PAIRO secara default dibuka atau diputar di dalam PAIRO. Attachment diterima sebagai ciphertext, lalu didekripsi seperlunya oleh viewer/player internal.
 
 ## 2. Jenis konten yang dipertimbangkan
 
-| Kategori | Contoh | Pengalaman yang diusulkan |
+| Kategori | Contoh | Pengalaman |
 |---|---|---|
-| Gambar | JPEG, PNG, WebP, GIF, HEIF/HEIC | Image viewer internal |
-| Video | MP4, WebM, format lain yang didukung decoder | Video player internal |
-| Audio | MP3, AAC, M4A, OGG, WAV, FLAC | Audio player internal |
-| Dokumen | PDF, TXT, dokumen lain setelah evaluasi | Document viewer atau preview internal |
+| Gambar | JPEG, PNG, WebP, GIF, HEIF/HEIC | Image Viewer |
+| Video | MP4, WebM, format yang didukung decoder | Video Player |
+| Audio | MP3, AAC, M4A, OGG, WAV, FLAC | Audio Player |
+| Dokumen | PDF, TXT, format lain setelah evaluasi | Document Viewer |
 | Arsip | ZIP dan format sejenis | Preview/ekstraksi terisolasi; belum diputuskan |
-| File umum | APK, Office, font, binary lain | Ditampilkan sebagai file; tidak otomatis dieksekusi atau dibuka eksternal |
+| File umum | APK, Office, font, binary | Informasi file; tidak otomatis dieksekusi |
 
-Daftar format adalah kandidat, bukan janji dukungan. Codec, ukuran maksimum, dan batas pemrosesan perlu ditentukan.
+Format dan batas ukuran masih perlu ditentukan.
 
-## 3. Alur yang diusulkan
+## 3. Alur attachment
 
 1. Pengirim memilih file melalui Android system picker.
 2. PAIRO membaca file menggunakan akses URI yang diberikan Android.
@@ -32,48 +30,62 @@ Daftar format adalah kandidat, bukan janji dukungan. Codec, ukuran maksimum, dan
 7. Plaintext sebisa mungkin hanya berada di memory atau cache privat sementara.
 8. Cache sementara dibersihkan setelah ditutup sesuai lifecycle dan batasan Android.
 
-## 4. Pembatasan akses aplikasi lain
+## 4. Kebijakan akses dan ekspor
 
-Usulan kontrol:
+Prinsip yang disetujui pengguna: **in-app by default, export by user choice**.
+
+- Secara default attachment dibuka di viewer/player internal dan tidak otomatis diekspor.
+- Pengguna boleh memilih Save to Gallery, Save to Device, Export, atau Share untuk attachment biasa.
+- Ekspor merupakan tindakan eksplisit pengguna, misalnya melalui menu attachment.
+- Ketika ekspor dilakukan, PAIRO mendekripsi file lalu menyerahkan salinan plaintext ke tujuan yang dipilih.
+- UI menjelaskan bahwa setelah diekspor, file berada di luar kontrol penyimpanan privat PAIRO dan dapat diakses aplikasi lain sesuai lokasi dan izin Android.
+- Pengguna tidak perlu mengekspor file hanya untuk melihatnya; viewer internal tetap menjadi jalur utama.
+
+Kontrol teknis yang diusulkan:
 - Jangan mengekspor attachment hasil dekripsi ke shared storage secara otomatis.
-- Jangan membuat share URI atau FileProvider untuk attachment privat kecuali pengguna secara eksplisit memilih Export/Share.
-- Jangan menggunakan implicit ACTION_VIEW untuk membuka attachment privat di aplikasi lain.
-- Simpan ciphertext dan database di internal app storage, bukan direktori publik.
-- Gunakan internal viewer/player untuk format yang didukung.
-- Pertimbangkan Android FLAG_SECURE pada layar sensitif sebagai mitigasi screenshot/screen recording; bukan jaminan absolut.
+- Buat share URI/FileProvider hanya ketika pengguna secara eksplisit memilih Share.
+- Jangan otomatis membuka attachment privat melalui aplikasi lain.
+- Simpan ciphertext dan database di internal app storage.
 - Hindari plaintext pada thumbnail cache, notification preview, recent-task snapshot, clipboard, log, dan crash report.
-- Audit exported activities, services, receivers, dan providers.
 - Validasi ukuran, signature/magic bytes, dan input decoder. Ekstensi atau MIME type saja bukan bukti file aman.
 
-## 5. Batasan yang perlu dipahami
+## 5. View Once
+
+Pengguna menyetujui View Once sebagai kebutuhan produk. Media yang dikirim dengan opsi ini ditujukan untuk dibuka satu kali oleh penerima melalui viewer internal PAIRO.
+
+Perilaku produk yang diusulkan:
+- Pengirim memilih opsi View Once sebelum mengirim attachment.
+- Penerima melihat indikator bahwa attachment adalah View Once.
+- Setelah konten dibuka dan status viewed tercatat, PAIRO tidak menyediakan pembukaan ulang dari chat.
+- View Once tidak dapat diekspor atau disimpan ke Gallery melalui fitur ekspor PAIRO.
+- PAIRO dapat menerapkan Android FLAG_SECURE ketika konten ditampilkan sebagai mitigasi screenshot/screen recording yang didukung Android.
+- Status viewed harus disinkronkan agar redelivery tidak mengembalikan kemampuan membuka ulang.
+
+Detail teknis yang masih terbuka:
+- Kapan view dihitung: saat dibuka atau setelah konten selesai dimuat.
+- Apakah video boleh diputar ulang dalam sesi yang sama.
+- Batas waktu penerima untuk membuka media.
+- Perilaku saat aplikasi crash, force-stop, atau perangkat offline.
+- Penanganan multi-device dan sinkronisasi status viewed.
+
+View Once tidak dapat mencegah penerima memotret layar dengan perangkat lain atau merekam konten dari endpoint yang dikompromikan.
+
+## 6. Batasan keamanan
 
 “In-app only” bukan format file ajaib yang membuat file mustahil dibuka di tempat lain. Ini adalah kebijakan aplikasi: secara default PAIRO tidak menyimpan plaintext di folder publik dan tidak menyerahkan file plaintext ke aplikasi lain.
 
-Jika pengguna mengekspor atau membagikan file, salinan hasil dekripsi dapat dibuka aplikasi lain. Penerima juga dapat memotret layar dengan perangkat lain atau merekam konten melalui perangkat yang telah dikompromikan. OS yang dikompromikan dapat mengakses data yang sedang diproses.
+Jika pengguna mengekspor atau membagikan attachment biasa, salinan hasil dekripsi dapat dibuka aplikasi lain. Penerima juga dapat merekam layar dengan perangkat lain. OS yang dikompromikan dapat mengakses data yang sedang diproses.
 
-Klaim realistis:
-- Attachment tidak muncul sebagai plaintext di Gallery/Downloads secara default.
-- Konten yang didukung ditampilkan melalui viewer/player internal.
-- Export/Share keluar PAIRO, jika tersedia, memerlukan tindakan eksplisit.
-- Tidak ada klaim bahwa screenshot, perekaman, atau penyalinan dapat dicegah 100%.
-
-## 6. Keputusan yang masih terbuka
-
-- Apakah Export/Share diizinkan, dinonaktifkan, atau memerlukan PIN/konfirmasi?
-- Apakah file dapat diunduh untuk offline viewing?
-- Apakah attachment memiliki expiry, disappearing media, atau view-once?
-- Apakah dokumen Office dan arsip didukung atau hanya preview?
-- Batas ukuran, durasi video, resolusi, dan jumlah attachment.
-- Kebijakan thumbnail/cache dan backup attachment.
-- Apakah audio dapat diputar di background?
+Tidak ada klaim bahwa screenshot, perekaman, atau penyalinan dapat dicegah 100%.
 
 ## 7. Acceptance criteria draft
 
-- Attachment tidak muncul sebagai plaintext di Gallery atau Downloads secara default.
-- Attachment privat tidak otomatis membuka aplikasi pihak ketiga.
+- Attachment tidak muncul sebagai plaintext di Gallery/Downloads secara default kecuali pengguna memilih Save/Export.
+- Pengguna dapat menyimpan attachment biasa ke Gallery/perangkat atau membagikannya melalui tindakan eksplisit.
+- Attachment biasa tidak otomatis membuka aplikasi pihak ketiga.
+- Attachment View Once tidak dapat diekspor melalui fitur PAIRO dan tidak dapat dibuka ulang setelah status viewed tercatat.
 - Format yang didukung dapat dibuka melalui viewer/player internal.
 - Relay hanya menerima ciphertext attachment.
 - Tidak ada plaintext attachment atau encryption key di log.
 - Temporary plaintext/cache mengikuti kebijakan pembersihan.
-- Export/Share, jika disediakan, membutuhkan tindakan eksplisit.
 - Pengujian mencakup beberapa versi Android, force-stop, crash, reboot, dan kondisi low storage.

@@ -89,3 +89,15 @@ Signaling:
 - Pengujian isolasi antaridentity.
 - Pengujian backup/restore dan wrong-key.
 - Review independen atas implementasi kriptografi dan relay.
+
+## 9. Private in-app media (usulan)
+
+- Attachment dienkripsi sebagai payload E2EE sebelum dikirim ke relay/provider.
+- Ciphertext disimpan di internal app storage; plaintext tidak diekspor ke shared/public storage secara default.
+- Viewer/player internal menghindari implicit ACTION_VIEW dan tidak membagikan URI/file ke aplikasi lain tanpa tindakan eksplisit.
+- Thumbnail, preview, recent-task snapshot, clipboard, dan temporary files masuk dalam threat model.
+- FLAG_SECURE dapat dipertimbangkan untuk layar sensitif, tetapi bukan jaminan anti-capture 100%.
+- Validasi ukuran, signature/magic bytes, MIME type, dan input decoder; ekstensi file saja tidak membuktikan file aman.
+- Audit exported components dan content providers agar data privat tidak terekspos.
+
+Batas klaim: jika pengguna mengekspor/membagikan file, salinan plaintext dapat dibuka aplikasi lain. OS/perangkat yang dikompromikan dan perekaman eksternal berada di luar jaminan aplikasi. Detail rancangan ada di [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md).

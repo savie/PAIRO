@@ -71,3 +71,19 @@ Grup, channel, panggilan, public discovery, web/desktop client, sinkronisasi mul
 - Tidak ada plaintext/private key dalam log atau payload relay.
 - Tidak ada kebocoran data antaridentity.
 - Backup valid dapat dipulihkan dan backup dengan recovery key salah ditolak.
+
+## 8. Tambahan kebutuhan attachment dan media privat (draft)
+
+| ID | Kebutuhan | Prioritas draft | Acceptance criteria draft |
+|---|---|---:|---|
+| FR-018 | Private in-app media | P1 | Gambar, video, audio, dan format file yang didukung dibuka melalui viewer/player internal secara default |
+| FR-019 | No automatic external opening | P1 | Attachment privat tidak otomatis diekspor ke shared storage atau dibuka aplikasi pihak ketiga |
+| FR-020 | Explicit export/share | Terbuka | Jika fitur ekspor disediakan, pengguna harus memulainya secara eksplisit; kebijakan final belum ditentukan |
+
+Tambahan NFR:
+- Attachment hasil dekripsi tidak disimpan ke shared/public storage secara default.
+- Plaintext attachment dibatasi pada memory atau cache privat sementara sejauh memungkinkan.
+- File yang tidak didukung tidak boleh otomatis dibuka aplikasi eksternal.
+- Format/codec yang didukung dan batas ukuran file harus ditentukan.
+
+Prinsip UX tambahan: attachment yang didukung dibuka di dalam PAIRO. Export atau pembagian keluar PAIRO, jika tersedia, harus menjadi tindakan eksplisit. Lihat [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md).

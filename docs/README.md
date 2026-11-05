@@ -21,18 +21,21 @@
 | [ROADMAP.md](ROADMAP.md) | Fase pengembangan dan gerbang penyelesaian |
 | [GLOSSARY.md](GLOSSARY.md) | Glosarium teknis |
 
-## Cara membaca status
+## Sumber kebenaran keputusan
 
-- **Hasil pembicaraan:** arah yang secara eksplisit disebut dalam percakapan.
-- **Usulan:** rekomendasi teknis yang belum disetujui.
-- **Terbuka:** memerlukan keputusan lanjutan.
-- **Draft:** seluruh spesifikasi masih dapat berubah.
+[DECISIONS.md](DECISIONS.md) adalah satu-satunya sumber status keputusan dan daftar hal terbuka.
+
+- Jangan mengulang pertanyaan yang sudah tercatat sebagai keputusan.
+- Jangan membuat daftar keputusan/hal terbuka baru di dokumen domain.
+- Dokumen domain hanya menjelaskan detail sesuai cakupannya.
+- Target Android 8–17 sudah ditetapkan; pengujian kompatibilitas adalah pekerjaan QA, bukan keputusan produk terbuka.
 
 ## Aturan dokumentasi
 
-1. Jangan mengubah usulan menjadi keputusan final tanpa persetujuan pemilik proyek.
-2. Setiap perubahan arsitektur harus memperbarui dokumen terkait.
-3. Jangan membuat klaim keamanan yang belum dibuktikan melalui implementasi, pengujian, dan review independen.
-4. Harga, kuota, lisensi, serta dukungan provider harus diverifikasi kembali sebelum implementasi.
+1. Catat keputusan baru terlebih dahulu di [DECISIONS.md](DECISIONS.md).
+2. Perbarui hanya dokumen domain yang terdampak; jangan menyalin ulang seluruh register keputusan.
+3. Jangan mengubah usulan menjadi keputusan tanpa persetujuan pemilik proyek.
+4. Jangan membuat klaim keamanan yang belum dibuktikan melalui implementasi, pengujian, dan review independen.
+5. Harga, kuota, lisensi, serta dukungan provider harus diverifikasi kembali sebelum implementasi.
 
 Tambahan dokumentasi: [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md) menjelaskan attachment E2EE, private in-app viewer/player, pembatasan akses aplikasi lain, dan batas klaim keamanan.

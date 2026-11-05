@@ -15,8 +15,8 @@ Perlu dibedakan:
 ## 2. Data lokal
 
 Secara konseptual data lokal mencakup:
-- Identity metadata.
-- Pairing metadata.
+- Identity metadata dan material pemulihan yang dipilih untuk dicadangkan.
+- Pairing/contact metadata.
 - Message records dan delivery state.
 - Attachment references dan encrypted blobs.
 - Pengaturan aplikasi.
@@ -51,6 +51,12 @@ SQLite/Room dapat dievaluasi sebagai lapisan data dengan solusi enkripsi databas
 
 ## 5. Personal cloud backup
 
+Arahan produk:
+- Semua kategori data yang ditetapkan harus tersedia sebagai pilihan backup.
+- Pengguna dapat memilih kategori data yang ingin dicadangkan.
+- Backup tetap opsional dan tidak berjalan tanpa persetujuan pengguna.
+- Backup harus mendukung pemilihan media/file satuan maupun multi-select.
+
 Provider yang dipertimbangkan:
 - Google Drive.
 - Dropbox.
@@ -59,26 +65,60 @@ Provider yang dipertimbangkan:
 
 Provider pertama untuk MVP belum dipilih. Aplikasi harus meminta persetujuan pengguna dan hanya meminta scope akses yang diperlukan.
 
-## 6. Alur backup
+## 6. Granularitas pilihan backup
 
-1. Buat snapshot konsisten database dan attachment.
-2. Buat arsip dengan manifest dan format version.
-3. Enkripsi arsip pada perangkat sebelum upload.
-4. Upload ciphertext ke cloud pilihan pengguna.
-5. Simpan metadata minimum untuk identifikasi versi backup.
-6. Restore mengunduh ciphertext, memverifikasi integritas, mendekripsi lokal, lalu memulihkan data.
+### Percakapan
+
+- Seluruh data percakapan diperlakukan sebagai satu batch backup.
+- Pengguna tidak memilih atau mengecualikan percakapan satu per satu.
+- Pilihan backup percakapan mencakup batch percakapan sesuai identity yang sedang dipilih.
+- Apakah batch dipisah per identity atau mencakup semua identity dalam satu arsip masih perlu diputuskan.
+
+### Media dan file
+
+- Pengguna dapat memilih satu media/file tertentu.
+- Pengguna dapat memilih beberapa media/file sekaligus (multi-select).
+- Pemilihan dilakukan saat proses backup.
+- Media/file yang dipilih tetap dienkripsi sebelum diunggah.
+- Perlu ditentukan bagaimana attachment yang terkait dengan pesan ditampilkan ketika pengguna memilih media secara terpisah.
+
+### Kategori lain
+
+Identity, pairing/contact metadata, pengaturan, dan state aplikasi perlu tersedia sebagai kategori yang dapat dipilih. Namun, material identity/session yang sensitif membutuhkan kebijakan khusus agar backup tidak menciptakan dua perangkat aktif atau melemahkan keamanan identity.
+
+## 7. Alur backup
+
+1. Pengguna memilih kategori yang ingin dicadangkan.
+2. Jika kategori percakapan dipilih, PAIRO menyiapkan seluruh percakapan sebagai satu batch, bukan per-conversation selection.
+3. Jika kategori media/file dipilih, pengguna dapat memilih satu atau beberapa item.
+4. Client membuat snapshot konsisten dan manifest backup.
+5. Client mengenkripsi arsip/data di perangkat sebelum upload.
+6. Client mengunggah ciphertext ke cloud pilihan pengguna.
+7. Metadata minimum disimpan untuk identifikasi versi backup.
+8. Restore mengunduh ciphertext, memverifikasi integritas, mendekripsi lokal, lalu memulihkan data sesuai pilihan dan validasi identity.
 
 Provider tidak menerima plaintext backup atau encryption key.
 
-## 7. Recovery
+## 8. Recovery dan single-device identity
 
+- Identity harus dapat dipulihkan/dipindahkan ke perangkat pengganti melalui proses validasi.
+- Satu identity hanya boleh aktif pada satu perangkat dalam satu waktu.
+- Restore backup pada perangkat baru tidak boleh membuat perangkat lama tetap aktif menggunakan identity yang sama.
 - Recovery key/secret terpisah dari password akun cloud.
 - Pengguna harus dapat menyimpan recovery material secara aman.
-- Kehilangan recovery secret dapat membuat backup tidak dapat dipulihkan.
-- Restore database tidak otomatis memulihkan identity/session jika material identity tidak ikut dicadangkan dengan aman.
-- Format backup harus versioned dan memiliki strategi migrasi.
+- Kehilangan recovery secret dapat membuat backup tidak dapat dipulihkan, kecuali tersedia mekanisme recovery alternatif yang telah dirancang.
 - Backup identity/session keys meningkatkan sensitivitas arsip dan memerlukan desain khusus.
+- Format backup harus versioned dan memiliki strategi migrasi.
 
-## 8. Penghapusan
+## 9. Penghapusan
 
 Aplikasi dapat meminta penghapusan backup melalui API provider. Penghapusan file tidak menjamin seluruh salinan internal provider langsung terhapus dari sistem backup mereka. Status penghapusan harus mengikuti kemampuan dan respons provider.
+
+## 10. Hal yang masih terbuka
+
+- Daftar kategori backup final.
+- Apakah percakapan dibatch per identity atau lintas identity.
+- Apakah media/file yang dipilih satuan ikut membawa metadata pesan terkait.
+- Apakah backup identity/session material dipisahkan dari backup konten.
+- Recovery flow untuk perangkat lama yang hilang/rusak/offline.
+- Provider cloud pertama, batas ukuran, dan strategi upload/resume.

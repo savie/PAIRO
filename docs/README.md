@@ -33,3 +33,5 @@
 2. Setiap perubahan arsitektur harus memperbarui dokumen terkait.
 3. Jangan membuat klaim keamanan yang belum dibuktikan melalui implementasi, pengujian, dan review independen.
 4. Harga, kuota, lisensi, serta dukungan provider harus diverifikasi kembali sebelum implementasi.
+
+Tambahan dokumentasi: [FILES_AND_MEDIA.md](FILES_AND_MEDIA.md) menjelaskan attachment E2EE, private in-app viewer/player, pembatasan akses aplikasi lain, dan batas klaim keamanan.

@@ -59,7 +59,8 @@
 | OPEN-013 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
 | OPEN-014 | Lisensi proyek dan kebijakan privasi? | Distribusi dan legal |
 | OPEN-015 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
-| OPEN-016 | Apakah video View Once boleh diputar ulang dalam sesi tampilan yang sama? | UX dan state machine |
+| TALK-016 | Video View Once replay | Video boleh diputar ulang selama sesi viewer yang sama masih terbuka; menutup viewer mengakhiri kesempatan melihat |
+| OPEN-016 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
 | OPEN-017 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
 | OPEN-018 | Bagaimana View Once berperilaku pada multi-device/recovery? | Sinkronisasi state |
 

@@ -18,7 +18,7 @@ PAIRO tidak meminta akses ke address book atau kontak sistem Android. Nama/label
 
 ## 3. Target platform
 
-Target rentang kompatibilitas awal yang disampaikan adalah Android 8 sampai Android 17. API level minimum/target, batas dukungan perangkat, dan kompatibilitas dependency harus diverifikasi sebelum implementasi final.
+Target rentang kompatibilitas produk yang telah dibahas adalah Android 8 sampai Android 17. Rentang ini tidak sedang dibuka untuk dipilih ulang. Sebelum implementasi, tim perlu memverifikasi API level, kompatibilitas dependency, keterbatasan fitur OS, dan matriks perangkat uji dalam rentang tersebut.
 
 ## 4. Kebutuhan fungsional
 

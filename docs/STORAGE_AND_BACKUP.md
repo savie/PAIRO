@@ -105,8 +105,11 @@ Provider tidak menerima plaintext backup atau encryption key.
 - Satu identity hanya boleh aktif pada satu perangkat dalam satu waktu.
 - Restore backup pada perangkat baru tidak boleh membuat perangkat lama tetap aktif menggunakan identity yang sama.
 - Recovery key/secret terpisah dari password akun cloud.
-- Pengguna harus dapat menyimpan recovery material secara aman.
-- Kehilangan recovery secret dapat membuat backup tidak dapat dipulihkan, kecuali tersedia mekanisme recovery alternatif yang telah dirancang.
+- Recovery key dibuat bersamaan dengan pembuatan identity, bukan saat backup pertama kali dijalankan.
+- Pengguna harus diberi kesempatan menyimpan recovery key secara mandiri di luar perangkat.
+- Saat perangkat aktif masih dapat diakses, migrasi meminta persetujuan dari perangkat aktif.
+- Jika perangkat aktif hilang/rusak/tidak tersedia, recovery key menjadi jalur validasi alternatif.
+- Kehilangan recovery key ketika perangkat aktif juga tidak tersedia dapat menyebabkan identity tidak dapat dipulihkan; prosedur pemulihan alternatif belum ditetapkan.
 - Backup identity/session keys meningkatkan sensitivitas arsip dan memerlukan desain khusus.
 - Format backup harus versioned dan memiliki strategi migrasi.
 
@@ -120,5 +123,8 @@ Aplikasi dapat meminta penghapusan backup melalui API provider. Penghapusan file
 - Apakah percakapan dibatch per identity atau lintas identity.
 - Apakah media/file yang dipilih satuan ikut membawa metadata pesan terkait.
 - Apakah backup identity/session material dipisahkan dari backup konten.
-- Recovery flow untuk perangkat lama yang hilang/rusak/offline.
+- Protokol persetujuan perangkat aktif dan recovery-key fallback.
+- Format, penyimpanan, rotasi, dan perlindungan recovery key.
+- Mekanisme revocation yang menjamin perangkat lama kehilangan otorisasi setelah recovery-key migration.
+- Prosedur jika recovery key hilang dan perangkat aktif tidak tersedia.
 - Provider cloud pertama, batas ukuran, dan strategi upload/resume.

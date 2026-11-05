@@ -32,3 +32,5 @@ Repository ini masih berada pada tahap dokumentasi dan perencanaan. Belum ada ap
 ## Lisensi
 
 Belum ditentukan.
+
+- Attachment yang didukung diarahkan untuk dibuka melalui viewer/player internal PAIRO; tidak otomatis diekspor atau dibuka aplikasi lain. Detailnya masih draft di [docs/FILES_AND_MEDIA.md](docs/FILES_AND_MEDIA.md).

@@ -24,7 +24,7 @@
 | TALK-014 | Attachment export | Pengguna boleh memilih sendiri untuk menyimpan/mengekspor attachment biasa ke Gallery/perangkat atau membagikannya; tidak otomatis |
 | TALK-015 | View Once | Fitur View Once untuk media disetujui sebagai kebutuhan produk; detail perilaku teknis masih terbuka |
 | TALK-016 | Video View Once replay | Video boleh diputar ulang selama sesi viewer yang sama masih terbuka; menutup viewer mengakhiri kesempatan melihat |
-| TALK-017 | Rentang dukungan Android | Target awal Android 8 sampai Android 17; API level dan kompatibilitas final harus diverifikasi sebelum implementasi |
+| TALK-017 | Rentang dukungan Android | Target produk Android 8 sampai Android 17; pengujian kompatibilitas merupakan pekerjaan QA, bukan pemilihan ulang rentang |
 | TALK-018 | Identity portability | Identity harus dapat dipindahkan/dipulihkan ke perangkat pengganti melalui proses validasi |
 | TALK-019 | Single-device identity | Satu identity hanya boleh aktif pada satu perangkat dalam satu waktu; aktivasi di perangkat lain memerlukan validasi dan menonaktifkan/mencabut otorisasi perangkat lama sesuai prosedur |
 | TALK-020 | Pairing lifecycle | Memutus pairing dan memasangkan kembali harus melalui persetujuan pihak-pihak terkait; pairing baru tidak aktif sepihak |
@@ -55,19 +55,7 @@
 | PROP-012 | Local contact book PAIRO | Menyimpan label/nama lokal untuk setiap pairing tanpa membaca kontak Android |
 | PROP-013 | Device authorization record | Mengikat satu identity ke satu perangkat aktif dan mendukung proses migrasi/revocation |
 
-## 3. Keputusan produk yang sudah dibahas — jangan ditanyakan ulang
-
-Lima pokok berikut sudah dibahas dan menjadi batas produk saat melanjutkan desain:
-
-| No. | Pokok | Ketentuan yang sudah disepakati |
-|---|---|---|
-| 01 | Rentang Android | Target awal Android 8 sampai Android 17. Pekerjaan tersisa hanya verifikasi kompatibilitas API, dependency, dan perangkat uji; bukan memilih ulang rentangnya. |
-| 02 | Validasi migrasi identity | Jika perangkat aktif masih tersedia, perangkat tujuan meminta persetujuan dari perangkat aktif. Jika perangkat aktif hilang/rusak/tidak tersedia, recovery key menjadi jalur validasi alternatif. |
-| 03 | Single-device dan pencabutan perangkat lama | Satu identity hanya boleh aktif pada satu perangkat. Setelah migrasi berhasil, otorisasi perangkat sebelumnya dicabut dan perangkat tujuan menjadi satu-satunya perangkat aktif. |
-| 04 | Kontinuitas identity | Migrasi mempertahankan identity dan fingerprint yang sama. Session/pre-key boleh dirotasi atau dibentuk ulang tanpa mengganti identity/fingerprint. |
-| 05 | Owner Mode dan kontak | Owner dapat mengelola beberapa identity/pairing sebagai kontak lokal PAIRO. Tidak meminta akses kontak Android dan Owner tidak otomatis dapat membaca percakapan identity lain. |
-
-## 4. Detail teknis yang masih terbuka
+## 3. Detail teknis yang masih terbuka
 
 Pertanyaan berikut adalah pekerjaan perincian implementasi atas keputusan yang sudah ada, bukan pembukaan ulang keputusan produk.
 
@@ -77,24 +65,24 @@ Pertanyaan berikut adalah pekerjaan perincian implementasi atas keputusan yang s
 | OPEN-002 | Mekanisme teknis pencabutan otorisasi perangkat lama yang tetap efektif pada jalur recovery key tanpa cloud database identity permanen. | Single-device enforcement |
 | OPEN-003 | Prosedur transfer/pemulihan material identity dan pembentukan ulang session/pre-key tanpa mengubah identity/fingerprint. | Keamanan migrasi |
 | OPEN-004 | Mekanisme provisioning dan enforcement Owner Mode yang aman, tanpa mengubah model kontak lokal dan batas akses percakapan yang telah disepakati. | Otorisasi Owner Mode |
-| OPEN-006 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
-| OPEN-007 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
-| OPEN-008 | Signaling service dibangun di mana? | Hosting dan operasi |
-| OPEN-009 | Relay self-host atau managed service? | Biaya dan kontrol |
-| OPEN-010 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
-| OPEN-011 | Provider cloud backup pertama? | OAuth/API/scope |
-| OPEN-012 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
-| OPEN-013 | Format recovery key, cara penyimpanan/rotasi, dan prosedur jika recovery key hilang? | Kehilangan data dan pemulihan identity |
-| OPEN-014 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
-| OPEN-015 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
-| OPEN-016 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
-| OPEN-017 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
-| OPEN-018 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
-| OPEN-019 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
-| OPEN-020 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
-| OPEN-021 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
-| OPEN-022 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
+| OPEN-005 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
+| OPEN-005 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
+| OPEN-005 | Signaling service dibangun di mana? | Hosting dan operasi |
+| OPEN-005 | Relay self-host atau managed service? | Biaya dan kontrol |
+| OPEN-005 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
+| OPEN-005 | Provider cloud backup pertama? | OAuth/API/scope |
+| OPEN-005 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
+| OPEN-005 | Format recovery key, cara penyimpanan/rotasi, dan prosedur jika recovery key hilang? | Kehilangan data dan pemulihan identity |
+| OPEN-005 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
+| OPEN-005 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
+| OPEN-005 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
+| OPEN-005 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
+| OPEN-005 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
+| OPEN-005 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
+| OPEN-005 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
+| OPEN-005 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
+| OPEN-005 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
 
-## 5. Aturan perubahan
+## 4. Aturan perubahan
 
 Setiap item hanya dapat dipindahkan menjadi keputusan final setelah dibahas dan disetujui pemilik proyek. Perubahan harus dicatat bersama alasan, konsekuensi, dan dokumen terdampak.

@@ -34,6 +34,8 @@
 | TALK-024 | Media/file backup granularity | Media dan file dapat dipilih secara individual atau multi-select saat proses backup |
 | TALK-025 | Licensing direction | Preferensi awal adalah model hybrid: dapat menggunakan komponen open-source yang lisensinya sesuai dan mengembangkan komponen PAIRO sendiri; lisensi aplikasi/repository belum diputuskan |
 | TALK-026 | Identity migration behavior | Ketika identity dipindahkan ke perangkat baru, identity tetap sama. Identitas kriptografis dan fingerprint tetap dipertahankan; bukan membuat identity baru. Migrasi tetap memerlukan validasi dan menonaktifkan perangkat lama. |
+| TALK-027 | Identity reactivation validation | Jika perangkat lama masih tersedia, perpindahan kembali ke perangkat tersebut memerlukan persetujuan dari perangkat yang saat ini aktif. Jika perangkat aktif tidak tersedia, pemilik dapat menggunakan recovery key untuk membuktikan kepemilikan. Kedua jalur harus tetap menegakkan satu perangkat aktif per identity. |
+| TALK-028 | Recovery key issuance | Recovery key dibuat saat identity pertama kali dibuat, bukan menunggu proses backup. Recovery key terpisah dari password akun cloud dan harus dapat disimpan secara mandiri oleh pengguna. |
 
 ## 2. Usulan teknis yang belum disetujui
 
@@ -58,8 +60,8 @@
 | ID | Pertanyaan | Dampak |
 |---|---|---|
 | OPEN-001 | API level minimum dan target Android final? | Kompatibilitas perangkat dan pemilihan library |
-| OPEN-002 | Bagaimana validasi identity saat migrasi? | Pencegahan pengambilalihan identity yang sama |
-| OPEN-003 | Bagaimana perangkat lama dinonaktifkan ketika identity dipindahkan, termasuk jika perangkat lama offline/hilang? | Single-device enforcement |
+| OPEN-002 | Rincian protokol persetujuan perangkat aktif dan recovery-key fallback, termasuk autentikasi, expiry, rate limit, dan pencegahan replay? | Pencegahan pengambilalihan identity yang sama |
+| OPEN-003 | Bagaimana otorisasi perangkat lama dicabut secara otoritatif ketika migrasi memakai recovery key tanpa persetujuan perangkat aktif? | Single-device enforcement |
 | OPEN-004 | Bagaimana material identity dipindahkan/dipulihkan tanpa mengubah fingerprint, dan bagaimana session key dirotasi atau dibentuk ulang? | Keamanan migrasi dan kontinuitas pairing |
 | OPEN-005 | Bagaimana provisioning dan otorisasi Owner Mode? | Otorisasi owner |
 | OPEN-006 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
@@ -69,7 +71,7 @@
 | OPEN-010 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
 | OPEN-011 | Provider cloud backup pertama? | OAuth/API/scope |
 | OPEN-012 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
-| OPEN-013 | Format recovery secret dan prosedur recovery jika secret hilang? | Kehilangan data dan pemulihan identity |
+| OPEN-013 | Format recovery key, cara penyimpanan/rotasi, dan prosedur jika recovery key hilang? | Kehilangan data dan pemulihan identity |
 | OPEN-014 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
 | OPEN-015 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
 | OPEN-016 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |

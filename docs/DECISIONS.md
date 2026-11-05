@@ -2,7 +2,7 @@
 
 > **Status: DRAFT — BELUM FINAL — BELUM DISETUJUI.**
 >
-> Tabel ini membedakan hasil pembicaraan dengan rekomendasi teknis. Catatan hasil pembicaraan merekam arahan pemilik proyek, tetapi keseluruhan spesifikasi tetap berstatus draft sampai dinyatakan final.
+> Dokumen ini adalah register utama status keputusan. Bagian hasil pembicaraan adalah keputusan produk yang sudah dibahas; bagian terbuka hanya memuat hal yang benar-benar belum diputuskan. Dokumen domain menjelaskan detail tanpa membuat daftar keputusan paralel.
 
 ## 1. Hasil pembicaraan yang sudah jelas
 
@@ -73,11 +73,10 @@ Pertanyaan berikut adalah pekerjaan perincian implementasi atas keputusan yang s
 
 | ID | Detail teknis yang perlu dirancang/diverifikasi | Dampak |
 |---|---|---|
-| OPEN-001 | Verifikasi kompatibilitas target Android 8–17: API level, dependency, fitur OS, dan matriks perangkat uji. | Kompatibilitas |
-| OPEN-002 | Spesifikasi protokol persetujuan perangkat aktif dan recovery-key fallback: autentikasi, expiry, rate limit, dan replay protection. | Pencegahan pengambilalihan identity |
-| OPEN-003 | Mekanisme teknis pencabutan otorisasi perangkat lama yang tetap efektif pada jalur recovery key tanpa cloud database identity permanen. | Single-device enforcement |
-| OPEN-004 | Prosedur transfer/pemulihan material identity dan pembentukan ulang session/pre-key tanpa mengubah identity/fingerprint. | Keamanan migrasi |
-| OPEN-005 | Mekanisme provisioning dan enforcement Owner Mode yang aman, tanpa mengubah model kontak lokal dan batas akses percakapan yang telah disepakati. | Otorisasi Owner Mode |
+| OPEN-001 | Spesifikasi protokol persetujuan perangkat aktif dan recovery-key fallback: autentikasi, expiry, rate limit, dan replay protection. | Pencegahan pengambilalihan identity |
+| OPEN-002 | Mekanisme teknis pencabutan otorisasi perangkat lama yang tetap efektif pada jalur recovery key tanpa cloud database identity permanen. | Single-device enforcement |
+| OPEN-003 | Prosedur transfer/pemulihan material identity dan pembentukan ulang session/pre-key tanpa mengubah identity/fingerprint. | Keamanan migrasi |
+| OPEN-004 | Mekanisme provisioning dan enforcement Owner Mode yang aman, tanpa mengubah model kontak lokal dan batas akses percakapan yang telah disepakati. | Otorisasi Owner Mode |
 | OPEN-006 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
 | OPEN-007 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
 | OPEN-008 | Signaling service dibangun di mana? | Hosting dan operasi |

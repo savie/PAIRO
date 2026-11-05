@@ -33,6 +33,7 @@
 | TALK-023 | Conversation backup granularity | Seluruh percakapan dicadangkan sebagai satu batch; pengguna tidak memilih percakapan satu per satu |
 | TALK-024 | Media/file backup granularity | Media dan file dapat dipilih secara individual atau multi-select saat proses backup |
 | TALK-025 | Licensing direction | Preferensi awal adalah model hybrid: dapat menggunakan komponen open-source yang lisensinya sesuai dan mengembangkan komponen PAIRO sendiri; lisensi aplikasi/repository belum diputuskan |
+| TALK-026 | Identity migration behavior | Ketika identity dipindahkan ke perangkat baru, identity tetap sama. Identitas kriptografis dan fingerprint tetap dipertahankan; bukan membuat identity baru. Migrasi tetap memerlukan validasi dan menonaktifkan perangkat lama. |
 
 ## 2. Usulan teknis yang belum disetujui
 
@@ -57,26 +58,27 @@
 | ID | Pertanyaan | Dampak |
 |---|---|---|
 | OPEN-001 | API level minimum dan target Android final? | Kompatibilitas perangkat dan pemilihan library |
-| OPEN-002 | Bagaimana validasi identity saat migrasi perangkat? | Pencegahan pengambilalihan identity |
-| OPEN-003 | Bagaimana perangkat lama dinonaktifkan ketika identity dipindahkan? | Single-device enforcement |
-| OPEN-004 | Bagaimana provisioning dan otorisasi Owner Mode? | Otorisasi owner |
-| OPEN-005 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
-| OPEN-006 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
-| OPEN-007 | Signaling service dibangun di mana? | Hosting dan operasi |
-| OPEN-008 | Relay self-host atau managed service? | Biaya dan kontrol |
-| OPEN-009 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
-| OPEN-010 | Provider cloud backup pertama? | OAuth/API/scope |
-| OPEN-011 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
-| OPEN-012 | Format recovery secret dan prosedur recovery jika secret hilang? | Kehilangan data dan pemulihan identity |
-| OPEN-013 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
-| OPEN-014 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
-| OPEN-015 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
-| OPEN-016 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
-| OPEN-017 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
-| OPEN-018 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
-| OPEN-019 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
-| OPEN-020 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
-| OPEN-021 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
+| OPEN-002 | Bagaimana validasi identity saat migrasi? | Pencegahan pengambilalihan identity yang sama |
+| OPEN-003 | Bagaimana perangkat lama dinonaktifkan ketika identity dipindahkan, termasuk jika perangkat lama offline/hilang? | Single-device enforcement |
+| OPEN-004 | Bagaimana material identity dipindahkan/dipulihkan tanpa mengubah fingerprint, dan bagaimana session key dirotasi atau dibentuk ulang? | Keamanan migrasi dan kontinuitas pairing |
+| OPEN-005 | Bagaimana provisioning dan otorisasi Owner Mode? | Otorisasi owner |
+| OPEN-006 | Library Signal Protocol mana yang kompatibel dan berlisensi sesuai? | E2EE implementation |
+| OPEN-007 | Library WebRTC dan distribusinya? | Ukuran APK dan maintenance |
+| OPEN-008 | Signaling service dibangun di mana? | Hosting dan operasi |
+| OPEN-009 | Relay self-host atau managed service? | Biaya dan kontrol |
+| OPEN-010 | Apakah TURN disediakan sendiri atau pihak ketiga? | Konektivitas dan bandwidth |
+| OPEN-011 | Provider cloud backup pertama? | OAuth/API/scope |
+| OPEN-012 | Data identity/session apa yang masuk backup dan bagaimana proteksinya? | Restore dan keamanan |
+| OPEN-013 | Format recovery secret dan prosedur recovery jika secret hilang? | Kehilangan data dan pemulihan identity |
+| OPEN-014 | Apakah TTL pengguna dapat lebih pendek dari tujuh hari? | Retensi |
+| OPEN-015 | Bagaimana attachment besar diunggah saat offline? | Relay/storage design |
+| OPEN-016 | Lisensi aplikasi utama, lisensi kontribusi, dan kebijakan distribusi dependency? | Legal dan distribusi |
+| OPEN-017 | Kapan View Once dianggap telah dilihat dan bagaimana menangani crash/force-stop? | Lifecycle dan anti-replay |
+| OPEN-018 | Bagaimana sesi viewer View Once ditandai selesai secara andal? | UX dan state machine |
+| OPEN-019 | Berapa lama penerima boleh menunggu sebelum membuka View Once? | Expiry dan UX |
+| OPEN-020 | Bagaimana View Once berperilaku pada recovery/migrasi perangkat? | Sinkronisasi state |
+| OPEN-021 | Kategori data apa saja yang tersedia pada backup selector dan bagaimana format manifest-nya? | Backup UX dan restore |
+| OPEN-022 | Apakah backup percakapan batch mencakup seluruh identity atau dipisah per identity? | Isolasi data dan restore |
 
 ## 4. Aturan perubahan
 
